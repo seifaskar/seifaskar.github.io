@@ -1,0 +1,290 @@
+/* ============ RESET / BASE ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;
+  --bg-2:#111;
+  --red:#D4001A;
+  --red-glow:rgba(212,0,26,.55);
+  --white:#fff;
+  --muted:#9a9a9a;
+  --line:rgba(255,255,255,.08);
+  --font-h:'Bebas Neue',Impact,sans-serif;
+  --font-b:'Inter',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--font-b);
+  line-height:1.5;
+  overflow-x:hidden;
+  transition:background .4s ease;
+}
+html[dir="rtl"] body{font-family:'Cairo',sans-serif}
+html[dir="rtl"] .fighter-name,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .coach-name,
+html[dir="rtl"] h3,
+html[dir="rtl"] .photo-tagline,
+html[dir="rtl"] .brand-text{font-family:'Cairo',sans-serif;font-weight:900;letter-spacing:0}
+
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+.octagon-watermark{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(212,0,26,.08), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(212,0,26,.06), transparent 45%);
+}
+.octagon-watermark::before{
+  content:"";position:absolute;top:50%;left:50%;
+  width:120vmin;height:120vmin;transform:translate(-50%,-50%);
+  background:#fff;opacity:.025;
+  clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%);
+}
+
+.lang-toggle{
+  position:fixed;top:18px;right:18px;z-index:50;
+  background:var(--red);color:#fff;border:none;
+  font-family:var(--font-h);font-size:18px;letter-spacing:2px;
+  padding:10px 20px 10px 26px;cursor:pointer;
+  clip-path:polygon(14px 0,100% 0,100% 100%,0 100%);
+  box-shadow:0 0 24px var(--red-glow);
+  transition:transform .25s,box-shadow .25s;
+}
+.lang-toggle:hover{transform:translateY(-2px);box-shadow:0 0 36px var(--red-glow)}
+html[dir="rtl"] .lang-toggle{
+  right:auto;left:18px;
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 100%,0 100%);
+  padding:10px 26px 10px 20px;
+  font-family:'Cairo',sans-serif;
+}
+
+.topbar{
+  position:relative;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 32px;border-bottom:1px solid var(--line);
+  background:rgba(10,10,10,.75);backdrop-filter:blur(10px);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-logo{width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 0 8px var(--red-glow))}
+.brand-text{font-family:var(--font-h);font-size:20px;letter-spacing:3px}
+.topnav{display:flex;gap:28px}
+.topnav a{
+  font-family:var(--font-h);font-size:16px;letter-spacing:2px;
+  color:#ddd;position:relative;padding:6px 0;transition:color .2s;
+}
+html[dir="rtl"] .topnav a{font-family:'Cairo',sans-serif;font-weight:700;letter-spacing:0;font-size:14px}
+.topnav a::after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
+  background:var(--red);transition:width .3s;
+}
+.topnav a:hover{color:var(--white)}
+.topnav a:hover::after{width:100%}
+
+@media(max-width:720px){
+  .topnav{display:none}
+  .brand-text{font-size:16px;letter-spacing:2px}
+}
+
+.hero{position:relative;z-index:1;padding:60px 0 80px;overflow:hidden}
+.hero-grid{
+  max-width:1240px;margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+}
+html[dir="rtl"] .hero-info{order:2;text-align:right}
+html[dir="rtl"] .hero-photo{order:1}
+
+.eyebrow{display:flex;align-items:center;gap:10px;font-family:var(--font-h);letter-spacing:4px;color:#ddd;margin-bottom:14px;font-size:14px}
+html[dir="rtl"] .eyebrow{font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:700}
+.dot{width:10px;height:10px;background:var(--red);border-radius:50%;box-shadow:0 0 12px var(--red)}
+
+.fighter-name{
+  font-family:var(--font-h);line-height:.85;
+  font-size:clamp(64px,11vw,160px);letter-spacing:2px;
+}
+.fighter-name .first{display:block;color:#fff}
+.fighter-name .last{display:block;color:transparent;-webkit-text-stroke:2px var(--red);text-shadow:0 0 30px var(--red-glow)}
+html[dir="rtl"] .fighter-name{font-size:clamp(54px,9vw,130px);letter-spacing:0}
+html[dir="rtl"] .fighter-name .last{-webkit-text-stroke:1px var(--red)}
+
+.nickname{font-family:var(--font-h);font-size:28px;letter-spacing:6px;color:var(--red);margin-top:8px}
+html[dir="rtl"] .nickname{font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:700;font-size:26px}
+
+.full-name{color:var(--muted);margin-top:6px;font-size:14px;letter-spacing:1px;text-transform:uppercase}
+html[dir="rtl"] .full-name{text-transform:none}
+
+.record-block{
+  display:flex;margin-top:30px;
+  border:1px solid var(--line);background:rgba(255,255,255,.02);
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);
+  max-width:480px;
+}
+.rec{flex:1;padding:18px 22px;text-align:center;border-right:1px solid var(--line)}
+.rec:last-child{border-right:none}
+.rec-num{display:block;font-family:var(--font-h);font-size:54px;line-height:1;color:#fff}
+.rec:nth-child(1) .rec-num{color:var(--red);text-shadow:0 0 20px var(--red-glow)}
+.rec-lbl{display:block;font-size:11px;letter-spacing:3px;color:var(--muted);margin-top:6px;font-family:var(--font-h)}
+html[dir="rtl"] .rec-lbl{font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:600}
+
+.hero-meta{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-size:13px;color:#ccc;letter-spacing:1px;text-transform:uppercase}
+html[dir="rtl"] .hero-meta{text-transform:none}
+.sep{width:4px;height:4px;background:var(--red);border-radius:50%}
+
+.socials{margin-top:24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.socials a{
+  width:42px;height:42px;display:grid;place-items:center;
+  border:1px solid var(--line);color:#ddd;
+  transition:all .25s;
+}
+.socials a svg{width:18px;height:18px}
+.socials a:hover{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 0 18px var(--red-glow);transform:translateY(-2px)}
+.socials .text-link{
+  width:auto;padding:0 14px;font-family:var(--font-h);letter-spacing:2px;font-size:14px;
+}
+
+.hero-photo{position:relative;display:grid;place-items:center;min-height:560px}
+.photo-glow{
+  position:absolute;width:90%;height:90%;
+  background:radial-gradient(circle,var(--red-glow) 0%,transparent 65%);
+  filter:blur(20px);animation:pulseGlow 4s ease-in-out infinite;
+}
+@keyframes pulseGlow{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.fighter-img{
+  position:relative;max-height:640px;width:auto;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.7));
+  animation:floatY 6s ease-in-out infinite;
+}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+html[dir="rtl"] .fighter-img{animation:floatYrtl 6s ease-in-out infinite}
+@keyframes floatYrtl{0%,100%{transform:scaleX(-1) translateY(0)}50%{transform:scaleX(-1) translateY(-10px)}}
+
+.photo-tagline{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  font-family:var(--font-h);font-size:80px;letter-spacing:6px;
+  color:rgba(255,255,255,.05);white-space:nowrap;pointer-events:none;
+  -webkit-text-stroke:1px rgba(212,0,26,.3);
+}
+html[dir="rtl"] .photo-tagline{font-family:'Cairo',sans-serif;font-size:60px;letter-spacing:0}
+
+@media(max-width:880px){
+  .hero-grid{grid-template-columns:1fr;text-align:center}
+  .hero-info{order:2}
+  .hero-photo{order:1;min-height:420px}
+  .fighter-img{max-height:460px}
+  .record-block{margin-left:auto;margin-right:auto}
+  .hero-meta,.socials{justify-content:center}
+  html[dir="rtl"] .hero-info{text-align:center}
+}
+
+.stats{position:relative;z-index:1;padding:80px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(212,0,26,.04),transparent)}
+.section-title{
+  font-family:var(--font-h);font-size:clamp(40px,6vw,72px);letter-spacing:4px;
+  margin-bottom:40px;position:relative;display:inline-block;
+}
+.section-title::after{
+  content:"";position:absolute;left:0;bottom:-10px;width:60px;height:4px;background:var(--red);box-shadow:0 0 16px var(--red-glow);
+}
+html[dir="rtl"] .section-title{letter-spacing:0}
+html[dir="rtl"] .section-title::after{left:auto;right:0}
+
+.stat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:60px}
+@media(max-width:880px){.stat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:520px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{
+  background:var(--bg-2);border:1px solid var(--line);
+  padding:22px 18px;position:relative;overflow:hidden;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  transition:all .25s;
+}
+.stat-card::before{content:"";position:absolute;top:0;left:0;width:3px;height:0;background:var(--red);transition:height .3s}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 0 22px rgba(212,0,26,.25)}
+.stat-card:hover::before{height:100%}
+.stat-label{display:block;font-family:var(--font-h);font-size:12px;letter-spacing:3px;color:var(--muted)}
+html[dir="rtl"] .stat-label{font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:600}
+.stat-value{display:block;font-family:var(--font-h);font-size:36px;line-height:1.1;margin-top:6px}
+.stat-value.sm{font-size:20px}
+.stat-value small{font-size:14px;color:var(--muted);margin-left:4px}
+html[dir="rtl"] .stat-value{font-family:'Cairo',sans-serif;font-weight:900}
+
+.bars-title{font-family:var(--font-h);font-size:24px;letter-spacing:3px;margin-bottom:18px;color:#ddd}
+html[dir="rtl"] .bars-title{font-family:'Cairo',sans-serif;font-weight:700;letter-spacing:0}
+.bars{display:flex;flex-direction:column;gap:14px;max-width:760px}
+.bar-row{display:grid;grid-template-columns:140px 1fr 50px;gap:14px;align-items:center}
+html[dir="rtl"] .bar-row{grid-template-columns:50px 1fr 140px}
+.bar-lbl{font-family:var(--font-h);font-size:14px;letter-spacing:2px;color:#ccc}
+html[dir="rtl"] .bar-lbl{font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:600}
+.bar{height:10px;background:#1a1a1a;position:relative;overflow:hidden;border:1px solid var(--line)}
+.bar-fill{
+  height:100%;width:0;background:linear-gradient(90deg,var(--red),#ff3050);
+  box-shadow:0 0 12px var(--red-glow);transition:width 1.6s cubic-bezier(.22,.9,.3,1);
+}
+.bar-pct{font-family:var(--font-h);color:var(--red);font-size:18px;text-align:right}
+html[dir="rtl"] .bar-pct{text-align:left}
+
+.history{padding:80px 0;border-top:1px solid var(--line)}
+.fights{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.fight-card{
+  display:flex;align-items:stretch;
+  background:var(--bg-2);border:1px solid var(--line);
+  overflow:hidden;transition:all .3s;position:relative;
+}
+.fight-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(212,0,26,.2);border-color:var(--red)}
+.fight-result{
+  background:var(--red);color:#fff;font-family:var(--font-h);
+  font-size:32px;letter-spacing:3px;
+  display:grid;place-items:center;padding:0 28px;
+  clip-path:polygon(0 0,100% 0,calc(100% - 18px) 100%,0 100%);
+  box-shadow:inset 0 0 30px rgba(0,0,0,.3);
+}
+html[dir="rtl"] .fight-result{
+  font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:900;
+  clip-path:polygon(18px 0,100% 0,100% 100%,0 100%);
+}
+.fight-meta{padding:20px 24px;flex:1}
+.fight-meta h3{font-family:var(--font-h);font-size:26px;letter-spacing:2px}
+.fight-meta p{color:#ddd;margin-top:4px;font-size:14px}
+.round{display:inline-block;margin-top:8px;color:var(--red);font-family:var(--font-h);letter-spacing:2px;font-size:14px}
+html[dir="rtl"] .round{font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:600}
+
+.coach{padding:80px 0;border-top:1px solid var(--line);background:linear-gradient(180deg,transparent,rgba(212,0,26,.04),transparent)}
+.coach-card{
+  display:grid;grid-template-columns:340px 1fr;gap:40px;align-items:center;
+  background:var(--bg-2);border:1px solid var(--line);padding:32px;
+  clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);
+}
+@media(max-width:780px){.coach-card{grid-template-columns:1fr;text-align:center}.coach-stats{justify-items:center}}
+.coach-photo{position:relative;display:grid;place-items:center;min-height:360px}
+.coach-photo img{position:relative;max-height:420px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.7));border-radius:6px}
+.coach-name{font-family:var(--font-h);font-size:60px;letter-spacing:3px;line-height:1}
+.coach-nick{color:var(--red);font-family:var(--font-h);font-size:22px;letter-spacing:4px;margin-top:4px}
+.coach-role{color:#ccc;margin-top:6px;font-size:14px;letter-spacing:1px}
+.coach-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0}
+.coach-stats > div{background:rgba(255,255,255,.02);border-left:2px solid var(--red);padding:10px 14px}
+html[dir="rtl"] .coach-stats > div{border-left:none;border-right:2px solid var(--red)}
+.cs-lbl{display:block;font-family:var(--font-h);font-size:11px;letter-spacing:2px;color:var(--muted)}
+html[dir="rtl"] .cs-lbl{font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:600}
+.cs-val{display:block;font-size:15px;color:#fff;margin-top:2px;font-weight:600}
+
+.team{padding:80px 0;border-top:1px solid var(--line)}
+.team-card{
+  display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:center;
+  background:var(--bg-2);border:1px solid var(--line);padding:32px;
+}
+@media(max-width:680px){.team-card{grid-template-columns:1fr;text-align:center}.team-card .socials{justify-content:center}}
+.team-logo{max-width:200px;filter:drop-shadow(0 0 20px var(--red-glow))}
+.team-info h3{font-family:var(--font-h);font-size:48px;letter-spacing:3px}
+.team-tag{color:var(--red);font-family:var(--font-h);letter-spacing:3px;margin-top:6px}
+html[dir="rtl"] .team-tag{font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:700}
+.team-coach{margin-top:10px;color:#ddd;font-size:14px;letter-spacing:1px}
+
+.footer{padding:30px 0;border-top:1px solid var(--line);background:#050505;position:relative;z-index:1}
+.footer-grid{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot-brand{display:flex;align-items:center;gap:12px;font-family:var(--font-h);letter-spacing:3px}
+html[dir="rtl"] .foot-brand{font-family:'Cairo',sans-serif;letter-spacing:0;font-weight:700}
+.foot-logo{width:36px;height:36px;object-fit:contain}
+.foot-copy{color:var(--muted);font-size:13px}
+
+html,body,.hero-grid,.coach-card,.team-card{transition:all .4s ease}
