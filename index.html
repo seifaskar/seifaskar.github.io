@@ -10,14 +10,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css" />
 <style>
-  /* Bigger fighter photo */
+  /* Bigger fighter photo (always stays inside its column, never crooked) */
   .hero-grid{grid-template-columns:1fr 1.2fr}
   .hero-photo{min-height:760px}
-  .fighter-img{height:720px;max-height:none;width:auto;max-width:none}
+  .fighter-img{width:auto;height:auto;max-width:100%;max-height:720px;object-fit:contain}
+
+  /* "Future Champion" text scales so phones can see all of it */
+  .photo-tagline,
+  html[dir="rtl"] .photo-tagline{
+    font-size:clamp(30px,8.5vw,80px);
+    letter-spacing:.07em;
+    max-width:100%;
+    text-align:center;
+  }
+  html[dir="rtl"] .photo-tagline{letter-spacing:0}
+  .nickname,
+  html[dir="rtl"] .nickname{font-size:clamp(20px,6vw,28px);letter-spacing:.18em;white-space:nowrap}
+  html[dir="rtl"] .nickname{letter-spacing:0}
+
   @media(max-width:880px){
     .hero-grid{grid-template-columns:1fr}
-    .hero-photo{min-height:540px}
-    .fighter-img{height:520px;max-width:100%;object-fit:contain}
+    .hero-photo{min-height:520px}
+    .fighter-img{max-height:500px}
   }
 </style>
 </head>
@@ -54,7 +68,7 @@
         <span class="first" data-en="SEIF" data-ar="سيف">SEIF</span>
         <span class="last" data-en="ASKAR" data-ar="عسكر">ASKAR</span>
       </h1>
-      <p class="nickname"><span data-en='"ASKAR"' data-ar='"عسكر"'>"ASKAR"</span></p>
+      <p class="nickname"><span data-en="FUTURE CHAMPION" data-ar="بطل المستقبل">FUTURE CHAMPION</span></p>
       <p class="full-name" data-en="Seif Abdelrahman Emam Askar" data-ar="سيف عبدالرحمن إمام عسكر">Seif Abdelrahman Emam Askar</p>
 
       <div class="record-block">
