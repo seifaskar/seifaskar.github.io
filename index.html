@@ -9,6 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css" />
+<style>
+  /* Bigger fighter photo */
+  .hero-grid{grid-template-columns:1fr 1.2fr}
+  .hero-photo{min-height:760px}
+  .fighter-img{height:720px;max-height:none;width:auto;max-width:none}
+  @media(max-width:880px){
+    .hero-grid{grid-template-columns:1fr}
+    .hero-photo{min-height:540px}
+    .fighter-img{height:520px;max-width:100%;object-fit:contain}
+  }
+</style>
 </head>
 <body>
 
